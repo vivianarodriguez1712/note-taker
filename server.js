@@ -5,9 +5,9 @@ const fs = require('fs');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-app.listen(PORT, () => {
-    console.log(`API server now on port 3001!`);
-  });
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+// app.use(express.static('public'))
 
 app.get('/api/notes', (req, res) =>
    res.json(notes)
@@ -21,11 +21,7 @@ app.get("/notes", (req, res) => {
    res.sendFile(path.join(__dirname, "./public/notes.html"))
 });
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static('public')
-
-,app.post('/api/notes', (req, res) => {
+app.post('/api/notes', (req, res) => {
 
     const currentNotes = req.body;
 
@@ -49,4 +45,6 @@ app.use(express.static('public')
 })
 
        res.json()
-})  )
+})  
+
+app.listen(PORT, () => console.log(`API server now on port 3001!`));
