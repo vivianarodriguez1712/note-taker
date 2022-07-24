@@ -5,13 +5,17 @@ const fs = require('fs');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-// app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static('public'))
 
 app.get('/api/notes', (req, res) =>
-   res.json(notes)
-);
+   let results = notes );
+   if (req.query) {
+    results = filterByQuery(req.query, results);
+  }
+  res.json(results);
+;
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./public/index.html"))
