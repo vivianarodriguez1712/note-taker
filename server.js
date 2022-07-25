@@ -1,6 +1,7 @@
 const express = require('express');
 const notes = require('./db/db.json');
 const fs = require('fs');
+const uuid = require('./uuid/uuid')
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -10,7 +11,7 @@ app.use(express.json());
 app.use(express.static('public'))
 
 app.get('/api/notes', (req, res) =>
-   let results = notes );
+   let ,results = notes );
    if (req.query) {
     results = filterByQuery(req.query, results);
   }
@@ -28,6 +29,7 @@ app.get("/notes", (req, res) => {
 app.post('/api/notes', (req, res) => {
 
     const currentNotes = req.body;
+    currentNotes.id = uuid();
 
     fs.readFile(path.join(__dirname, "./db/db.json"), "utf8", (error, notes) => {
         if (error) {
