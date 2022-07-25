@@ -2,6 +2,7 @@ const express = require('express');
 const notes = require('./db/db.json');
 const fs = require('fs');
 const uuid = require('./uuid/uuid')
+const notesJs = require('./lib/notes')
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -17,6 +18,15 @@ app.get('/api/notes', (req, res) => {
   }
   res.json(results);
 });
+
+app.get('/api/notes/:id', (req, res) => {
+    const result = findById(req.params.id, notes);
+    if (result) {
+      res.json(result); 
+     } else {
+         res.send(404);
+     }
+  });
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./public/index.html"))
