@@ -10,13 +10,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'))
 
-app.get('/api/notes', (req, res) =>
-   let ,results = notes );
+app.get('/api/notes', (req, res) => {
+   let results = notes;
    if (req.query) {
     results = filterByQuery(req.query, results);
   }
   res.json(results);
-;
+});
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./public/index.html"))
