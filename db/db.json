@@ -1,5 +1,5 @@
-{
-  "notes": [ 
+[
+
     {
         "id": 2345,
         "title":"Note 1",
@@ -29,5 +29,5 @@
         "title":"Note 5",
         "text":["Client lunch on thursday"]
     }
- ]
-}
+
+]
