@@ -44,11 +44,19 @@ function filterByQuery(query, notesArray) {
   }
 
 app.get('/api/notes', (req, res) => {
-   let results = notes;
-   if (req.query) {
-    results = filterByQuery(req.query, results);
-  }
-  res.json(results);
+
+fs.readFile(path.join(__dirname, "./db/db.json"), "utf8", (error, notes) => {
+    if (error) {
+        return console.log(error)
+    }
+   
+    else{
+        
+        const previousNotes = JSON.parse(notes)
+        res.json(previousNotes);
+    }
+    
+})
 });
 
 app.get('/api/notes/:id', (req, res) => {
@@ -59,6 +67,10 @@ app.get('/api/notes/:id', (req, res) => {
          res.send(404);
      }
   });
+
+app.put('/api/notes/:id', (req, res) => {
+    console.log(req.params)
+})
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./public/index.html"))
@@ -80,7 +92,7 @@ app.post('/api/notes', (req, res) => {
        
         else{
             
-            const previousNotes = JSON.parse(data)
+            const previousNotes = JSON.parse(notes)
         
         previousNotes.push(currentNotes);
 
