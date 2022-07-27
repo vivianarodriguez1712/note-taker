@@ -69,7 +69,8 @@ app.get('/api/notes/:id', (req, res) => {
   });
 
 app.put('/api/notes/:id', (req, res) => {
-    console.log(req.params)
+    const currentNotes = req.body;
+    console.log(currentNotes)
 })
 
 app.get("/", (req, res) => {
